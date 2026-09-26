@@ -16,7 +16,7 @@ export const categories = mysqlTable('categories', {
   updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const menus = mysqlTable('menus', {
+export const menus = mysqlTable('menu_items', {
   id: varchar('id', { length: 255 }).primaryKey(),
   categoryId: varchar('category_id', { length: 255 }).notNull(),
   name: varchar('name', { length: 255 }).notNull(),
