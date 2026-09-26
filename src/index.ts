@@ -10,10 +10,20 @@ import webhookRouter from './modules/webhook';
 const app = new Hono();
 
 // CORS Middleware
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
+  : ['https://nuasama-frontend.pages.dev', 'http://localhost:3000'];
+
 app.use('*', cors({
-  origin: '*',
+  origin: (origin) => {
+    if (!origin || allowedOrigins.includes(origin)) return origin;
+    return null;
+  },
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
+
 
 // Health check
 app.get('/', (c) => {
