@@ -1,11 +1,7 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 
-import authRouter from './modules/auth';
 import menuRouter from './modules/menu';
-import categoryRouter from './modules/category';
-import orderRouter from './modules/order';
-import webhookRouter from './modules/webhook';
 
 const app = new Hono();
 
@@ -34,10 +30,10 @@ app.get('/', (c) => {
 });
 
 // Routes
-app.route('/auth', authRouter);
+// app.route('/auth', authRouter); // TODO: rewrite to match Go
 app.route('/menu', menuRouter);
-app.route('/categories', categoryRouter);
-app.route('/orders', orderRouter);
-app.route('/webhook', webhookRouter);
+// app.route('/categories', categoryRouter); // DELETED in Go
+// app.route('/orders', orderRouter); // TODO: rewrite to match Go
+// app.route('/webhook', webhookRouter); // TODO: rewrite to match Go
 
 export default app;
