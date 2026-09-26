@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { getDB } from '../db';
-import { menus, categories } from '../db/schema';
+import { menus } from '../db/schema';
 import { eq } from 'drizzle-orm';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
@@ -10,16 +10,17 @@ const app = new Hono();
 app.get('/', async (c) => {
   const db = getDB();
   const result = await db.select({
-    id: menus.id, name: menus.name, description: menus.description,
-    price: menus.price, image: menus.image, isAvailable: menus.isAvailable,
-    categoryId: menus.categoryId, categoryName: categories.name,
-  }).from(menus).leftJoin(categories, eq(menus.categoryId, categories.id));
+    id: menus.id,
+    name: menus.name,
+    description: menus.description,
+    price: menus.price,
+    image: menus.photoUrl,
+    category: menus.category,
+    is_available: menus.stockStatus,
+    dapur_id: menus.dapurId,
+  }).from(menus).where(eq(menus.stockStatus, 'aktif'));
   
-  return c.json({ data: result.map(m => ({
-    id: m.id, name: m.name, description: m.description, price: m.price,
-    image: m.image, is_available: m.isAvailable, category_id: m.categoryId,
-    Category: { id: m.categoryId, name: m.categoryName },
-  }))});
+  return c.json({ data: result });
 });
 
 const menuSchema = z.object({

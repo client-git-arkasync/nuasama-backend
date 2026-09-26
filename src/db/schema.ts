@@ -18,12 +18,13 @@ export const categories = mysqlTable('categories', {
 
 export const menus = mysqlTable('menu_items', {
   id: varchar('id', { length: 255 }).primaryKey(),
-  categoryId: varchar('category_id', { length: 255 }).notNull(),
   name: varchar('name', { length: 255 }).notNull(),
   description: text('description'),
   price: float('price').notNull(),
-  image: varchar('image', { length: 255 }),
-  isAvailable: boolean('is_available').default(true),
+  photoUrl: varchar('photo_url', { length: 500 }),
+  category: varchar('category', { length: 255 }).notNull(),
+  stockStatus: varchar('stock_status', { length: 20 }).default('aktif'),
+  dapurId: varchar('dapur_id', { length: 255 }),
   createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
   updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
