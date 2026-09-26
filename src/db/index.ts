@@ -13,8 +13,11 @@ export function getDB() {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0
+      connectionLimit: 5,
+      queueLimit: 0,
+      connectTimeout: 10000,      // 10s timeout koneksi
+      acquireTimeout: 10000,      // 10s timeout acquire
+      idleTimeout: 30000,         // tutup koneksi idle setelah 30s
     });
   }
   return drizzle(pool);
