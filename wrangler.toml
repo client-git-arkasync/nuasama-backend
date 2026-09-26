@@ -1,0 +1,8 @@
+name = "nuasama-backendjs"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nuasama-db"
+database_id = "9e8009fc-2322-4ec3-afb1-d3d09d127184"
