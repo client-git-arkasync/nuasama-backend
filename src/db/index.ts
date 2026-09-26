@@ -16,7 +16,6 @@ export function getDB() {
       connectionLimit: 5,
       queueLimit: 0,
       connectTimeout: 10000,      // 10s timeout koneksi
-      acquireTimeout: 10000,      // 10s timeout acquire
       idleTimeout: 30000,         // tutup koneksi idle setelah 30s
     });
   }
